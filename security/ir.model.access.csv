@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+kiosks.access_kiosks_kiosk,access_kiosks_kiosk,model_kiosks_kiosk,base.group_user,1,1,1,1
+kiosks.access_kiosks_vendor,access_kiosks_vendor,model_kiosks_vendor,base.group_user,1,1,1,1
+kiosks.access_kiosks_license,access_kiosks_license,model_kiosks_license,base.group_user,1,1,1,1
+kiosks.access_kiosks_transaction,access_kiosks_transaction,model_kiosks_transaction,base.group_user,1,1,1,1
+kiosks.access_kiosks_payment,access_kiosks_payment,model_kiosks_payment,base.group_user,1,1,1,1

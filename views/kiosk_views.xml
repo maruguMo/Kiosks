@@ -1,0 +1,53 @@
+<odoo>
+    <record id="view_kiosk_form" model="ir.ui.view">
+        <field name="name">kiosk.form</field>
+        <field name="model">kiosks.kiosk</field>
+        <field name="arch" type="xml">
+            <!-- Form view root node is <form> -->
+            <form string="Kiosk Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="size"/>
+                            <field name="status"/>
+                            <field name="location"/>
+                            <field name="manufacture_date"/>
+                            <field name="manufacture_id"/>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
+                        </group>
+                        <group>
+                            <field name="size_image" widget="image" class="oe_picture" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="geolocation" widget="map" options="{'lat': 'latitude', 'lng': 'longitude'}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Kiosks -->
+    <record id="view_kiosk_tree" model="ir.ui.view">
+        <field name="name">kiosk.tree</field>
+        <field name="model">kiosks.kiosk</field>
+        <field name="arch" type="xml">
+            <tree string="Kiosks">
+                <field name="name"/>
+                <field name="size"/>
+                <field name="status"/>
+                <field name="location"/>
+                <field name="manufacture_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_kiosk_form_action" model="ir.actions.act_window">
+        <field name="name">Kiosks</field>
+        <field name="res_model">kiosks.kiosk</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_kiosk_tree"/>
+    </record>    
+</odoo>

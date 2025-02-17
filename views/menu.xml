@@ -1,0 +1,22 @@
+<odoo>
+    <menuitem id="main_kiosk_menu" name="Kiosks Management"/>
+    <menuitem 
+        id="kiosk_menu" 
+        parent="main_kiosk_menu" 
+        name="Kiosks" 
+        action="view_kiosk_form_action"/>
+    
+    <menuitem 
+        id="vendor_menu" 
+        parent="main_kiosk_menu" 
+        name="Vendors" 
+        action="view_vendor_form_action"/>
+        
+    <menuitem 
+        id="license_menu" 
+        parent="main_kiosk_menu" 
+        name="Licenses(Leases)" 
+        action="view_license_form_action"
+        sequence="10"/>
+
+</odoo>

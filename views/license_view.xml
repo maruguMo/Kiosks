@@ -1,0 +1,47 @@
+<odoo>
+    <record id="view_license_form" model="ir.ui.view">
+        <field name="name">license.form</field>
+        <field name="model">kiosks.license</field>
+        <field name="arch" type="xml">
+            <form string="Kiosk License (Lease)">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="annual_fee"/>
+                        <field name="date_start"/>
+                        <field name="date_end"/>
+                        <field name="kiosk_id"/>
+                        <field name="vendor_id"/>
+                        <field name="is_expired" string="Expired" widget="boolean_toggle"/>
+                    </group>
+                    <group>
+                        <field name="latitude"/>
+                        <field name="longitude"/>
+                    </group>
+                    <group>
+                        <field name="geolocation" widget="map" options="{'lat': 'latitude', 'lng': 'longitude'}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+   <!-- Tree view for leases -->
+    <record id="view_license_tree" model="ir.ui.view">
+        <field name="name">license.tree</field>
+        <field name="model">kiosks.license</field>
+        <field name="arch" type="xml">
+            <tree string="Licenses (Leases)">
+                <field name="kiosk_id" string="Kiosk Name"/>
+                <field name="vendor_full_name" string="Vendor Name"/>
+                <field name="date_start" string="Lease Start"/>
+                <field name="date_end" string="Lease End"/>
+                <field name="is_expired" string="Expired"/>
+            </tree>
+        </field>
+    </record>   
+    <record id="view_license_form_action" model="ir.actions.act_window">
+        <field name="name">Licenses(Leases)</field>
+        <field name="res_model">kiosks.license</field>
+        <field name="view_mode">tree,form</field>
+    </record>      
+</odoo>

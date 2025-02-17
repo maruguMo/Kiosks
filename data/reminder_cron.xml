@@ -1,0 +1,12 @@
+<odoo>
+    <record id="lease_expiry_reminder_cron" model="ir.cron">
+        <field name="name">Lease Expiry Reminder</field>
+        <field name="model_id" ref="model_kiosks_license"/>
+        <field name="state">code</field>
+        <field name="code">model._send_lease_expiry_reminders()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

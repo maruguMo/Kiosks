@@ -1,0 +1,54 @@
+<odoo>
+    <record id="view_vendor_form" model="ir.ui.view">
+        <field name="name">vendor.form</field>
+        <field name="model">kiosks.vendor</field>
+        <field name="arch" type="xml">
+            <form >
+                <sheet>
+                    <group>
+                        <field name="first_name"/>
+                        <field name="second_name"/>
+                        <field name="id_document"/>
+                        <field name="id_number"/>
+                        <field name="email" />
+                        <field name="phone" />
+                    </group>
+                    <notebook>
+                        <page string="Leases">
+                            <field name="lease_ids" mode="tree">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="kiosk_id"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view for vendors -->
+    <record id ="view_vendor_tree" model ="ir.ui.view">
+        <field name="name">vendor.tree</field>
+        <field name="model">kiosks.vendor</field>
+        <field name="arch" type="xml">
+            <tree string="Vendors">
+                <field name="first_name"/>
+                <field name="second_name"/>
+                <field name="id_number"/>
+                <field name="email" />
+                <field name="phone" />
+                <field name="lease_count" string="Number of Leases"/> <!--count number of leases the vendor has -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_vendor_form_action" model="ir.actions.act_window">
+        <field name="name">vendors</field>
+        <field name="res_model">kiosks.vendor</field>
+        <field name="view_mode">tree,form</field>
+    </record>  
+</odoo>
