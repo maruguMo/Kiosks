@@ -5,7 +5,7 @@
         <field name="arch" type="xml">
             <!-- Form view root node is <form> -->
             <form string="Kiosk Details">
-                <sheet>
+                <sheet class="bg-light p-3 shadow-sm">
                     <group>
                         <group>
                             <field name="name"/>
@@ -34,7 +34,7 @@
         <field name="name">kiosk.tree</field>
         <field name="model">kiosks.kiosk</field>
         <field name="arch" type="xml">
-            <tree string="Kiosks">
+            <tree string="Kiosks" class="table table-striped table-bordered">
                 <field name="name"/>
                 <field name="size"/>
                 <field name="status"/>

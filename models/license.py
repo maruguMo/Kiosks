@@ -9,6 +9,12 @@ class KioskLicense(models.Model):
     annual_fee = fields.Float(string="Annual Fee")
     date_start = fields.Date(string="Lease Start Date", required=True)
     date_end = fields.Date(string="Lease End Date")
+    date_terminate = fields.Date(string="Date Terminated")
+    status = fields.Selection([
+        ('active', 'Active'),
+        ('terminated', 'Terminated'),
+        ('expired', 'Expired')
+    ], string="Status", compute='_compute_status', store=True)
     
     kiosk_id = fields.Many2one("kiosks.kiosk", string="Kiosk", required=True)
     vendor_id = fields.Many2one("kiosks.vendor", string="Vendor", required=True)
@@ -18,7 +24,16 @@ class KioskLicense(models.Model):
 
     geolocation = fields.Char(string="Geolocation", compute="_compute_geolocation") #incase the kiosk is moved
     is_expired = fields.Boolean('Expired', compute='_compute_is_expired', store=True)
+
     vendor_full_name = fields.Char('Vendor Name', compute='_compute_vendor_full_name', store=True)
+
+    show_terminate_button = fields.Boolean( compute="_compute_show_terminate_button", store=False)
+
+    @api.depends("is_expired", "status")
+    def _compute_show_terminate_button(self):
+        for record in self:
+            record.show_terminate_button = not record.is_expired and record.status == "active"
+
 
     @api.depends("latitude", "longitude")
     def _compute_geolocation(self):
@@ -50,3 +65,16 @@ class KioskLicense(models.Model):
             if lease.vendor_id.email:
                 template = self.env.ref('kiosks.lease_expiry_email_template')
                 template.send_mail(lease.id, force_send=True)
+
+    @api.depends('date_end')
+    def _compute_status(self):
+        for record in self:
+            if record.date_end and record.date_end < fields.Date.today():
+                record.status = 'expired'
+            else:
+                record.status = 'active'
+
+    def action_terminate_lease(self):
+        self.write({'status': 'terminated'})
+        if self.kiosk_id:
+            self.kiosk_id.status = 'available'

@@ -4,8 +4,8 @@
         <field name="model">kiosks.license</field>
         <field name="arch" type="xml">
             <form string="Kiosk License (Lease)">
-                <sheet>
-                    <group>
+                <sheet class="bg-light p-3 shadow-sm">
+                    <group  class="col-md-6">
                         <field name="name"/>
                         <field name="annual_fee"/>
                         <field name="date_start"/>
@@ -14,11 +14,11 @@
                         <field name="vendor_id"/>
                         <field name="is_expired" string="Expired" widget="boolean_toggle"/>
                     </group>
-                    <group>
+                    <group class="col-md-6">
                         <field name="latitude"/>
                         <field name="longitude"/>
                     </group>
-                    <group>
+                    <group class="col-md-6">
                         <field name="geolocation" widget="map" options="{'lat': 'latitude', 'lng': 'longitude'}"/>
                     </group>
                 </sheet>
@@ -31,11 +31,18 @@
         <field name="model">kiosks.license</field>
         <field name="arch" type="xml">
             <tree string="Licenses (Leases)">
+                <field name="name" string="Lease"/>
                 <field name="kiosk_id" string="Kiosk Name"/>
                 <field name="vendor_full_name" string="Vendor Name"/>
                 <field name="date_start" string="Lease Start"/>
                 <field name="date_end" string="Lease End"/>
-                <field name="is_expired" string="Expired"/>
+                <field name="is_expired" string="Expired?"/>
+                <button 
+                        class ="btn btn-primary" 
+                        name ="action_terminate_lease" 
+                        string ="Terminate" 
+                        type ="Object" 
+                />
             </tree>
         </field>
     </record>   

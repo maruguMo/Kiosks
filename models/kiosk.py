@@ -21,12 +21,14 @@ class Kiosk(models.Model):
         ("available", "Available"),
         ("rented", "Rented"),
         ("sold", "Sold")
-    ], string="Status", default="available")
+    ], string="Status", default="available", compute='_compute_status', store=True)
 
     manufacture_date = fields.Date(string="Manufacture Date")
     manufacture_id = fields.Char(string="Manufacture ID", size=10)
 
     lease_ids = fields.One2many("kiosks.license", "kiosk_id", string="Lease History")
+
+    transaction_id = fields.Many2one('kiosks.transaction', string="Sale Transaction")
  
     @api.depends("latitude", "longitude")
     def _compute_geolocation(self):
@@ -46,12 +48,26 @@ class Kiosk(models.Model):
                     record.size_image = False
             else:
                 record.size_image = False
-                
-    @api.onchange("status")
+
+    # compute if a kiosk has an active lease and set status automatically                
+    @api.depends('lease_ids.is_expired', 'status')
+    def _compute_status(self):
+        for record in self:
+            active_lease = record.lease_ids.filtered(lambda l: not l.is_expired)
+            if not active_lease and record.status != 'sold':
+                record.status = 'available'
+            else:
+                record.status = 'rented'
+
+    @api.onchange('status')
     def _onchange_status(self):
-        for rec in self:
-            if rec.status == "available":
-                rec.lease_ids.filtered(lambda l: not l.end_date).write({"end_date": date.today()})
+        if self.status == 'sold':
+            if not self.transaction_id:
+                raise exceptions.ValidationError("A sale transaction must be recorded when marking a kiosk as sold.")
+            # Terminate active leases
+            active_leases = self.env['kiosks.license'].search([('kiosk_id', '=', self.id), ('is_expired', '=', False)])
+            for lease in active_leases:
+                lease.action_terminate_lease()
 
     @api.model
     def action_save(self):
