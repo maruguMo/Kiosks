@@ -14,7 +14,7 @@ class KioskLicense(models.Model):
         ('active', 'Active'),
         ('terminated', 'Terminated'),
         ('expired', 'Expired')
-    ], string=" ", compute='_compute_status', store=True, readonly=True)
+    ], string="", compute='_compute_status', store=True, readonly=True)
     
     kiosk_id = fields.Many2one("kiosks.kiosk", string="Kiosk", required=True)
     vendor_id = fields.Many2one("kiosks.vendor", string="Vendor", required=True)

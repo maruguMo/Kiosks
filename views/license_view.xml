@@ -8,39 +8,33 @@
                 <div class="rec-container flex-row mb-3">
                     <div class="form-container shadow-lg">
                         <sheet>
-                            <group class="justify-content-end flex-dir-row  mb-3 row ">
-                                <div class="d-flex gap-2">  <!-- Changed flex-column to align-items-center and added gap -->
-                                    <button type="object" name="action_save" string="Save" class="btn-primary"/>
-                                    <button type="object" string="Discard" class="btn-secondary" special="cancel"/>
+                            <group class="mb-3 row">
+                                <div class="justify-content-end flex-dir-row d-flex gap-2 btn-group">  <!-- Changed flex-column to align-items-center and added gap -->
+                                    <button type="object" name="action_save" string="Save" class="btn btn-sm btn-primary"/>
+                                    <button type="object" string="Discard" class="btn btn-sm btn-secondary" special="cancel"/>
                                 </div>
-                            </group>
-                            <br/>                        
-                            <group class="row d-flex">
-                                <group class="col-12">
-                                    <group>
-                                        <field name="name"/>
-                                        <field name="annual_fee"/>
-                                        <field name="date_start"/>
-                                        <field name="date_end"/>
-                                        <field name="kiosk_id"/>
-                                        <group>
-                                            <field name ="vendor_id"/>
-                                            <field name="vendor_full_name"/>
-                                        </group>                                        
-                                    </group>
-                                    <field name="is_expired" string="Expired" widget="boolean_toggle"/>
-                                    <group>
-                                        <field name="latitude"/>
-                                        <field name="longitude"/>
-                                        <field name="geolocation" widget="map" options="{'lat': 'latitude', 'lng': 'longitude'}"/>
-                                    </group>
-                                </group>
-                                <!-- Status Box (Right Side) -->
-                                <group class="oe_right status-box  float-right col-3 px-2">
+                                <group class="oe_right float-right status-box flex-dir-col align-items-center justify-content-center">
                                     <field name="status" class="status-text" readonly="1"/>
                                 </group>
                             </group>
-
+                            <br/>                        
+                            <group class="row d-flex">
+                                <group>
+                                    <field name="name"/>
+                                    <field name="annual_fee"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="kiosk_id"/>
+                                    <field name ="vendor_id"/>
+                                    <!-- <field name="vendor_full_name"/> -->
+                                    <field name="is_expired" string="Expired" widget="boolean_toggle"/>
+                                </group>
+                                <group>
+                                    <field name="latitude"/>
+                                    <field name="longitude"/>
+                                    <field name="geolocation" widget="map" options="{'lat': 'latitude', 'lng': 'longitude'}"/>
+                                </group>
+                            </group>
                         </sheet>
                     </div>
                 </div>

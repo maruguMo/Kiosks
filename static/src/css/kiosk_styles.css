@@ -1,20 +1,25 @@
 /*kiosk styles are here */
 .status-box {
-    background-color: #adabab;  /* Light grey box */
+    /* display: flex; */
+    background-color: #101820;  /* Light grey box */
     padding: 15px;
     border-radius: 5px;
     text-align: center;
     font-weight: bold;
-    font-size: 18px;
-    width: 200px;
+    width: 10dvw;
+    height: 8dvh;
     margin-left: auto;  /* Push to the right */
     float: right;
     color:white;
     padding: 2%;
 }
 .status-text {
-    color: #ee1810;  /* Red for emphasis */
+    text-align: center;
+    font-weight:bold;
+    font-size: 22px;
+    color:  #FEE715;  /* Red for emphasis */
     font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .flex-dir-row{
     display: inline-flex;
