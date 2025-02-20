@@ -16,11 +16,10 @@
         "views/menu.xml",
         "data/reminder_cron.xml",
         "data/email_template.xml",
-        #  "static/src/css/kiosk_styles.css",
         ],
     'assets': {
         'web.assets_backend': [
-            # 'kiosk/static/src/css/kiosk_styles.css',
+            'kiosks/static/src/css/kiosk_styles.css',
             'kiosks/static/src/img/small.png',
             'kiosks/static/src/img/medium.png',
             'kiosks/static/src/img/large.png',

@@ -1,54 +1,101 @@
 <odoo>
+    <!-- Form View -->
     <record id="view_license_form" model="ir.ui.view">
         <field name="name">license.form</field>
         <field name="model">kiosks.license</field>
         <field name="arch" type="xml">
-            <form string="Kiosk License (Lease)">
-                <sheet class="bg-light p-3 shadow-sm">
-                    <group  class="col-md-6">
-                        <field name="name"/>
-                        <field name="annual_fee"/>
-                        <field name="date_start"/>
-                        <field name="date_end"/>
-                        <field name="kiosk_id"/>
-                        <field name="vendor_id"/>
-                        <field name="is_expired" string="Expired" widget="boolean_toggle"/>
-                    </group>
-                    <group class="col-md-6">
-                        <field name="latitude"/>
-                        <field name="longitude"/>
-                    </group>
-                    <group class="col-md-6">
-                        <field name="geolocation" widget="map" options="{'lat': 'latitude', 'lng': 'longitude'}"/>
-                    </group>
-                </sheet>
+            <form string="Kiosk License (Lease)" edit="1" class="flex-row">
+                <div class="rec-container flex-row mb-3">
+                    <div class="form-container shadow-lg">
+                        <sheet>
+                            <group class="justify-content-end flex-dir-row  mb-3 row ">
+                                <div class="d-flex gap-2">  <!-- Changed flex-column to align-items-center and added gap -->
+                                    <button type="object" name="action_save" string="Save" class="btn-primary"/>
+                                    <button type="object" string="Discard" class="btn-secondary" special="cancel"/>
+                                </div>
+                            </group>
+                            <br/>                        
+                            <group class="row d-flex">
+                                <group class="col-12">
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="annual_fee"/>
+                                        <field name="date_start"/>
+                                        <field name="date_end"/>
+                                        <field name="kiosk_id"/>
+                                        <group>
+                                            <field name ="vendor_id"/>
+                                            <field name="vendor_full_name"/>
+                                        </group>                                        
+                                    </group>
+                                    <field name="is_expired" string="Expired" widget="boolean_toggle"/>
+                                    <group>
+                                        <field name="latitude"/>
+                                        <field name="longitude"/>
+                                        <field name="geolocation" widget="map" options="{'lat': 'latitude', 'lng': 'longitude'}"/>
+                                    </group>
+                                </group>
+                                <!-- Status Box (Right Side) -->
+                                <group class="oe_right status-box  float-right col-3 px-2">
+                                    <field name="status" class="status-text" readonly="1"/>
+                                </group>
+                            </group>
+
+                        </sheet>
+                    </div>
+                </div>
             </form>
         </field>
     </record>
-   <!-- Tree view for leases -->
-    <record id="view_license_tree" model="ir.ui.view">
-        <field name="name">license.tree</field>
+
+    <!-- Kanban View -->
+    <record id="view_license_kanban" model="ir.ui.view">
+        <field name="name">license.kanban</field>
         <field name="model">kiosks.license</field>
         <field name="arch" type="xml">
-            <tree string="Licenses (Leases)">
-                <field name="name" string="Lease"/>
-                <field name="kiosk_id" string="Kiosk Name"/>
-                <field name="vendor_full_name" string="Vendor Name"/>
-                <field name="date_start" string="Lease Start"/>
-                <field name="date_end" string="Lease End"/>
-                <field name="is_expired" string="Expired?"/>
-                <button 
-                        class ="btn btn-primary" 
-                        name ="action_terminate_lease" 
-                        string ="Terminate" 
-                        type ="Object" 
-                />
-            </tree>
+            <kanban class="o_kanban_view">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-data-id="{{ record.id }}" class="oe_kanban_global_click">
+                            <div class="card shadow-sm p-3">
+                                <div class="d-flex justify-content-between">
+                                    <strong class="text-primary">
+                                        <field name="name" string="Lease"/>
+                                    </strong>
+                                    <span class="badge badge-secondary">
+                                        <field name="status" string="Status"/>
+                                    </span>
+                                </div>
+                                <div class="text-muted mt-2">
+                                    <span><strong>Kiosk:</strong> <field name="kiosk_id"/></span><br/>
+                                    <span><strong>Vendor:</strong> <field name="vendor_full_name"/></span>
+                                </div>
+                                <div class="mt-2">
+                                    <span><strong>Start:</strong> <field name="date_start"/></span><br />
+                                    <span><strong>End:</strong> <field name="date_end"/></span>
+                                </div>
+                                <div class="d-flex justify-content-between mt-3">
+                                    <span class="text-success">
+                                        <strong>Annual Fee:</strong> <field name="annual_fee"/>
+                                    </span>
+                                    <button class="btn btn-danger btn-sm" name="action_terminate_lease" 
+                                            type="object" invisible="not show_terminate_button">
+                                        Terminate
+                                    </button>
+                                    <field name="show_terminate_button" invisible="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
-    </record>   
+    </record>
+
+    <!-- Action for the View -->
     <record id="view_license_form_action" model="ir.actions.act_window">
-        <field name="name">Licenses(Leases)</field>
+        <field name="name">Licenses (Leases)</field>
         <field name="res_model">kiosks.license</field>
-        <field name="view_mode">tree,form</field>
-    </record>      
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
 </odoo>

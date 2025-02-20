@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 class KioskLicense(models.Model):
     _name = "kiosks.license"
@@ -14,7 +14,7 @@ class KioskLicense(models.Model):
         ('active', 'Active'),
         ('terminated', 'Terminated'),
         ('expired', 'Expired')
-    ], string="Status", compute='_compute_status', store=True)
+    ], string=" ", compute='_compute_status', store=True, readonly=True)
     
     kiosk_id = fields.Many2one("kiosks.kiosk", string="Kiosk", required=True)
     vendor_id = fields.Many2one("kiosks.vendor", string="Vendor", required=True)
@@ -78,3 +78,10 @@ class KioskLicense(models.Model):
         self.write({'status': 'terminated'})
         if self.kiosk_id:
             self.kiosk_id.status = 'available'
+
+        # Save button method
+    def action_save(self):
+        # Perform any custom logic here if needed
+        return {
+            'type': 'ir.actions.act_window_close'  # Close the form after saving
+        }

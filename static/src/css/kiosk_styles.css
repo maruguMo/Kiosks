@@ -1,1 +1,55 @@
-/*  */
+/*kiosk styles are here */
+.status-box {
+    background-color: #adabab;  /* Light grey box */
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    width: 200px;
+    margin-left: auto;  /* Push to the right */
+    float: right;
+    color:white;
+    padding: 2%;
+}
+.status-text {
+    color: #ee1810;  /* Red for emphasis */
+    font-weight: bold;
+}
+.flex-dir-row{
+    display: inline-flex;
+    flex-direction: row;
+}
+.flex-dir-col{
+    display: flex;
+    flex-direction: column;
+}
+.form-container {
+    width: 60dvw;  /* Adjust as needed */
+    margin:0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.rec-container{
+    width:100dvw;
+
+}
+.o_kanban_view.o_kanban_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.card {
+    cursor:pointer;
+    border-radius: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
