@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="kiosks.MapWidget">
+        <div class="o_field_map" style="height: 400px; width: 100%;"/>
+    </t>
+</templates>
