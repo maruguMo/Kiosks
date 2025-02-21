@@ -58,3 +58,7 @@
 .card:hover {
     transform: scale(1.05);
 }
+.map-style{
+    height: 400px; 
+    width: 100%;
+}

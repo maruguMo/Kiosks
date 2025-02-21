@@ -1,5 +1,4 @@
 <odoo>
-    <!-- Form View -->
     <record id="view_license_form" model="ir.ui.view">
         <field name="name">license.form</field>
         <field name="model">kiosks.license</field>
@@ -9,7 +8,7 @@
                     <div class="form-container shadow-lg">
                         <sheet>
                             <group class="mb-3 row">
-                                <div class="justify-content-end flex-dir-row d-flex gap-2 btn-group">  <!-- Changed flex-column to align-items-center and added gap -->
+                                <div class="justify-content-end flex-dir-row d-flex gap-2 btn-group">
                                     <button type="object" name="action_save" string="Save" class="btn btn-sm btn-primary"/>
                                     <button type="object" string="Discard" class="btn btn-sm btn-secondary" special="cancel"/>
                                 </div>
@@ -25,14 +24,13 @@
                                     <field name="date_start"/>
                                     <field name="date_end"/>
                                     <field name="kiosk_id"/>
-                                    <field name ="vendor_id"/>
-                                    <!-- <field name="vendor_full_name"/> -->
+                                    <field name="vendor_id"/>
                                     <field name="is_expired" string="Expired" widget="boolean_toggle"/>
                                 </group>
                                 <group>
                                     <field name="latitude"/>
                                     <field name="longitude"/>
-                                    <field name="geolocation" widget="map" options="{'lat': 'latitude', 'lng': 'longitude'}"/>
+                                    <!-- <field name="geolocation" widget="osm_map"/> -->
                                 </group>
                             </group>
                         </sheet>
@@ -92,4 +90,5 @@
         <field name="res_model">kiosks.license</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
+
 </odoo>
